@@ -1,1 +1,245 @@
-style.css
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #eaf7ea; /* Light green background */
+  color: #333;
+}
+
+h1.first-heading {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #2e8b57; /* Green */
+  margin-top: 20px;
+}
+
+form {
+  max-width: 800px;
+  margin: 20px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Section Headings */
+h3 {
+  color: #2e8b57; /* Green */
+  border-bottom: 2px solid #2e8b57; /* Green */
+  padding-bottom: 5px;
+  margin-top: 20px;
+}
+
+/* Labels */
+label {
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin: 10px 0 5px;
+}
+
+/* Input Fields */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus,
+select:focus,
+textarea:focus {
+  border: 1px solid #2e8b57; /* Green */
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* Submit Button */
+button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background-color: #2e8b57; /* Green */
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+}
+
+button:hover {
+  background-color: #228b22; /* Darker Green */
+}
+
+/* Hover Effect on Input Focus */
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="tel"]:hover,
+input[type="date"]:hover,
+select:hover,
+textarea:hover {
+  border: 1px solid #228b22; /* Darker Green */
+}
+
+/* Card Display for Options */
+#dynamicForm select {
+  font-size: 1rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  form {
+      padding: 15px;
+  }
+
+  h1.first-heading {
+      font-size: 2rem;
+  }
+
+  button {
+      font-size: 0.9rem;
+  }
+}
+
+/* Icon Styling */
+.icon {
+  color: #2e8b57; /* Green */
+  margin-right: 5px;
+}
+
+/* Additional Styling for Special Elements */
+h2#selectedSystemType {
+  color: #666;
+  font-style: italic;
+}
+
+input::placeholder {
+  color: #999;
+}
+
+/* Hide sections initially */
+#electricalAspects,
+#quotationSubsidy,
+#option3,
+#option4 {
+  display: none;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #eaf7ea; /* Light green */
+}
+
+/* Contact Card Styling */
+.card {
+  width: 100%;
+  max-width: 900px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.card img.logo {
+  width: 120px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.card h2 {
+  font-size: 2.5rem;
+  color: #2e8b57; /* Green */
+  margin-bottom: 20px;
+}
+
+.card .description {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.card .contact-details p {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.card .contact-details i {
+  color: #2e8b57; /* Green */
+  margin-right: 10px;
+}
+
+/* Map Styling */
+.card iframe {
+  width: 100%;
+  height: 300px;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+/* Email & Phone Links */
+.card .contact-details a {
+  color: #2e8b57; /* Green */
+  text-decoration: none;
+}
+
+.card .contact-details a:hover {
+  text-decoration: underline;
+}
+
+/* Buttons */
+.card .button {
+  background-color: #2e8b57; /* Green */
+  color: white;
+  padding: 12px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.card .button:hover {
+  background-color: #228b22; /* Darker Green */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .card {
+      padding: 20px;
+  }
+
+  .card h2 {
+      font-size: 2rem;
+  }
+
+  .card .description {
+      font-size: 1rem;
+  }
+
+  .card .contact-details p {
+      font-size: 0.9rem;
+  }
+}

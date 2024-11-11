@@ -1,0 +1,124 @@
+<script>
+    function generatePDF() {
+        // Import jsPDF module
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF();
+    
+        // Define the selected system label (this would be the type of system selected)
+        // const selectedLabel = "Hybrid"; // Example, replace with actual selected value
+    
+        // Define company contact details
+        const companyContactDetails = `
+            Email: customercare@newpious.com
+            Phone: +91 522 313 7400
+            Website: https://newpious.com/
+        `;
+    
+        // Add the logo image at the top-left of the title
+        const logoImg = new Image();
+        logoImg.src = 'whbaclogo.png'; // Ensure this path is correct and accessible
+    
+        const ContactIMG = new Image();
+        ContactIMG.src = 'mapn.png'; 
+    
+        // When the image loads, generate the PDF
+        logoImg.onload = function () {
+            // Add logo image (increased size)
+            pdf.addImage(logoImg, 'WEBP', 1, 1, 80, 50); // Increase logo size to 50x25
+    
+            // Set the system type selected (in bold and red, centered)
+            // const selectedLabel = "Hybrid"; // Example, replace with actual selected value
+            pdf.setFontSize(18);
+            pdf.setTextColor(255, 0, 0); // Red color
+            pdf.setFont("helvetica", "bold");
+            pdf.text(`Type of System :\n${selectedLabel}`, 105, 20, null, null, 'center');
+// Centered text
+    
+            // Set company contact details (in black, centered)
+            pdf.setFontSize(10);
+            pdf.setTextColor(20, 0, 0); // Black color for contact details
+            pdf.setFont("helvetica", "normal");
+    
+            const contactDetailsLines = pdf.splitTextToSize(companyContactDetails, 180); // Wrap text if it exceeds 180 width
+            pdf.setTextColor(255, 0, 255); // Black color for contact details
+
+            pdf.text(contactDetailsLines, 170, 14, null, null, 'center'); // Centered text
+    
+            // Draw a horizontal black line
+            pdf.setDrawColor(0, 0, 0); // Black color for the line
+            pdf.line(10, 44, 200, 44);
+            pdf.line(10, 45, 200, 45); // Draw a horizontal line from (10, 35) to (200, 35)
+    
+            // Set title for the form (after contact details)
+            pdf.setFontSize(22);
+            pdf.setTextColor(0, 0, 255); // Blue color for heading
+            pdf.setFont("helvetica", "bold");
+    
+            // Get form data and add it to the PDF
+            const formFields = document.querySelectorAll("#dynamicForm input, #dynamicForm select, #dynamicForm textarea");
+            let yOffset = 80;
+    
+            formFields.forEach((field) => {
+                const label = document.querySelector(`label[for="${field.id}"]`);
+                const labelText = label ? label.innerText : field.name;
+                const value = field.value || "N/A";
+                
+                // Only print the field if its value is not "N/A"
+                if (value !== "N/A") {
+                    // Set label text color and align to the left
+                    pdf.setTextColor(0, 0, 0); // Black color for labels
+                    pdf.setFontSize(12);
+                    pdf.text(`${labelText}:`, 10, yOffset); // Label on the left
+                    
+                    // Set the input value color and align to the right (dark blue)
+                    pdf.setTextColor(0, 0, 139); // Dark blue for input values
+                    
+                    // Check if the value length exceeds 40 characters and break into new lines
+                    const maxLength = 40;
+                    let currentText = value;
+                    let xOffset = 100;
+                    
+                    // Split the input value into multiple lines if necessary
+                    while (currentText.length > maxLength) {
+                        const line = currentText.substring(0, maxLength);
+                        pdf.text(line, xOffset, yOffset);
+                        currentText = currentText.substring(maxLength);
+                        yOffset += 8; // Move down for the next line
+                    }
+                    
+                    // Print remaining part if it's less than 40 characters
+                    if (currentText.length > 0) {
+                        pdf.text(currentText, xOffset, yOffset);
+                        yOffset += 8;
+                    }
+    
+                    // Draw a black horizontal line
+                    pdf.setDrawColor(0, 0, 0); // Black color for the line
+                    pdf.line(10, yOffset, 200, yOffset); // Line under each field
+                    yOffset += 4;
+                }
+    
+                // Move to a new page if needed
+                if (yOffset > 270) {
+                    pdf.addPage();
+                    yOffset = 20;
+                }
+            });
+        
+            // Add the contact image at the bottom (centered with 80% width)
+            ContactIMG.onload = function () {
+                const contactImgWidth = pdf.internal.pageSize.width * 0.8; // 80% width of the page
+                const contactImgHeight = (contactImgWidth * ContactIMG.height) / ContactIMG.width;
+                
+                // Center the image
+                const xOffset = (pdf.internal.pageSize.width - contactImgWidth) / 2;
+                
+                pdf.addImage(ContactIMG, 'PNG', xOffset, yOffset, contactImgWidth, contactImgHeight);
+                yOffset += contactImgHeight + 10;
+    
+                // Save the PDF
+                pdf.save("form_data.pdf");
+            };
+        };
+    }
+    </script>
